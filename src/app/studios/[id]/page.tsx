@@ -12,9 +12,13 @@ const STUDIOS: Record<string, { emoji: string; name: string; addr: string; price
   "4": { emoji: "🖼", name: "Art Space", addr: "Москва, Измайлово", price: 2500, rating: 4.6, reviews: 67, desc: "Арт-пространство с уникальными декорациями и фонами.", halls: [{ name: "Gallery", price: 2500 }] },
 };
 
+export function generateStaticParams() {
+  return Object.keys(STUDIOS).map((id) => ({ id }));
+}
+
 export default function StudioDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const s = STUDIOS[id] ?? STUDIOS["1"];
+  const s = STUDIOS[id as string] ?? STUDIOS["1"];
   const { format } = useCurrencyStore();
 
   return (
@@ -24,45 +28,23 @@ export default function StudioDetailPage() {
         <Link href="/studios" style={{ width: 36, height: 36, borderRadius: 12, background: "#FFFFFF", border: "1px solid rgba(139,115,85,0.15)", display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none" }}>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2C2418" strokeWidth="2" strokeLinecap="round"><polyline points="15 18 9 12 15 6"/></svg>
         </Link>
-        <div style={{ fontSize: 18, fontWeight: 700, color: "#2C2418" }}>{s.name}</div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: "#2C2418" }}>{s.emoji} {s.name}</div>
       </div>
-
-      <div className="page-scroll" style={{ paddingBottom: 20 }}>
-        <div style={{ height: 180, background: "#EDE9E1", margin: "12px 16px 0", borderRadius: 18, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 64 }}>
-          {s.emoji}
-        </div>
-
-        <div style={{ padding: "14px 16px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-            <div>
-              <div style={{ fontSize: 18, fontWeight: 700, color: "#2C2418" }}>{s.name}</div>
-              <div style={{ fontSize: 12, color: "#A89880", marginTop: 3 }}>📍 {s.addr}</div>
-            </div>
-            <div style={{ fontSize: 18, fontWeight: 800, color: "#8B6B3D" }}>{format(s.price)}/ч</div>
-          </div>
-          <div style={{ fontSize: 12, color: "#C4965A", marginTop: 6 }}>{"★".repeat(Math.floor(s.rating))} {s.rating} · {s.reviews} отзывов</div>
-          <div style={{ fontSize: 13, color: "#7A6B55", lineHeight: 1.6, marginTop: 10 }}>{s.desc}</div>
-        </div>
-
-        {/* Halls */}
-        <div style={{ padding: "0 16px 14px" }}>
-          <div style={{ fontSize: 13, fontWeight: 600, color: "#2C2418", marginBottom: 8 }}>Залы</div>
-          {s.halls.map((h, i) => (
-            <div key={i} className="raw-card" style={{ padding: "12px 14px", marginBottom: 8, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <div style={{ fontSize: 13, fontWeight: 500, color: "#2C2418" }}>{h.name}</div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: "#8B6B3D" }}>{format(h.price)}/ч</div>
-            </div>
-          ))}
-        </div>
-
-        <div style={{ padding: "0 16px", display: "flex", gap: 10 }}>
-          <div style={{ flex: 1, background: "#F0E8DC", borderRadius: 14, padding: "12px 0", textAlign: "center", fontSize: 13, fontWeight: 600, color: "#8B6B3D", cursor: "pointer" }}>
-            В подборку
-          </div>
-          <div style={{ flex: 1, background: "#2C2418", borderRadius: 14, padding: "12px 0", textAlign: "center", fontSize: 13, fontWeight: 600, color: "#FFFFFF", cursor: "pointer" }}>
-            Забронировать
+      <div style={{ padding: "16px 16px 0" }}>
+        <div style={{ background: "#FFFFFF", borderRadius: 16, padding: 16, border: "1px solid rgba(139,115,85,0.15)", marginBottom: 12 }}>
+          <div style={{ color: "#8B7355", fontSize: 13, marginBottom: 4 }}>{s.addr}</div>
+          <div style={{ color: "#2C2418", fontSize: 14, lineHeight: 1.5 }}>{s.desc}</div>
+          <div style={{ display: "flex", gap: 8, marginTop: 12, alignItems: "center" }}>
+            <span style={{ fontSize: 13, color: "#8B7355" }}>⭐ {s.rating}</span>
+            <span style={{ fontSize: 13, color: "#8B7355" }}>· {s.reviews} отзывов</span>
           </div>
         </div>
+        {s.halls.map((hall) => (
+          <div key={hall.name} style={{ background: "#FFFFFF", borderRadius: 16, padding: 16, border: "1px solid rgba(139,115,85,0.15)", marginBottom: 12, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ fontSize: 15, fontWeight: 600, color: "#2C2418" }}>{hall.name}</div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: "#2C2418" }}>{format(hall.price)}/ч</div>
+          </div>
+        ))}
       </div>
       <BottomNav />
     </div>

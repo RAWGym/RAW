@@ -1,54 +1,23 @@
-# RAW Photography App
+# RAW Photography PWA
 
-Визуальный PWA-прототип приложения для фотографов. Полноценный запуск без бэкенда — только дизайн + рабочий переключатель валюты ₽ / ₸.
+## Deploy to GitHub Pages
 
-## Запуск
+1. Push this repo to `rawgym/RAW` on GitHub
+2. Go to **Settings → Pages → Source** → select **GitHub Actions**
+3. Push to `main` — the workflow auto-deploys
+
+App will be live at: **https://rawgym.github.io/RAW/**
+
+## Local dev
 
 ```bash
 npm install
 npm run dev
 ```
 
-Открыть → [http://localhost:3000](http://localhost:3000)
-
-На десктопе рендерится как iPhone-фрейм. На мобильном — полноценный PWA.
-
-## Установка как приложение (PWA)
-
-**iPhone:** Safari → Поделиться → «На экран "Домой"»  
-**Android:** Chrome → меню → «Добавить на главный экран»
-
-## Страницы
-
-| Экран | URL |
-|-------|-----|
-| Главная | `/dashboard` |
-| Календарь | `/calendar` |
-| Студии | `/studios` |
-| Карточка студии | `/studios/[id]` |
-| Подборки | `/collections` |
-| Клиенты | `/clients` |
-| Карточка клиента | `/clients/[id]` |
-| Финансы | `/finance` |
-| Схемы света | `/lighting` |
-| AI Ассистент | `/ai` |
-| Профиль | `/profile` |
-| Тарифы | `/subscription` |
-
-## Валюта
-
-Переключатель **₽ / ₸** на главной и в профиле. Выбор сохраняется в localStorage.  
-Курс: `1 ₽ = 5.5 ₸` — поменять в `src/store/currencyStore.ts`.
-
-## Стек
-
-- Next.js 15 · React 19 · TypeScript
-- Tailwind CSS 3
-- Zustand (стейт валюты)
-- Recharts (графики)
-
-## Деплой на Vercel
+## Build
 
 ```bash
-npx vercel
+npm run build
+# Static files output to ./out/
 ```
