@@ -2,40 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-    "Inter", "Segoe UI", system-ui, sans-serif;
-}
-
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
 
-html {
-  font-family: var(--font-sans);
-  background: #FAF8F5;
-  overscroll-behavior: none;
-}
-
+html,
 body {
   margin: 0;
   padding: 0;
-  background: #FAF8F5;
-  color: #2C2418;
+  background: #faf8f5;
+  color: #2c2418;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Segoe UI", system-ui, sans-serif;
   overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ── Phone shell ─────────────────────────────────── */
 .phone-shell {
   max-width: 430px;
   min-height: 100dvh;
   margin: 0 auto;
-  background: #FAF8F5;
+  background: #faf8f5;
   position: relative;
 }
 
+/* ── Scrollable content area (above bottom nav) ──── */
 .page-scroll {
   height: calc(100dvh - 80px);
   overflow-y: auto;
@@ -47,6 +41,7 @@ body {
   display: none;
 }
 
+/* ── Bottom nav bar ──────────────────────────────── */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -60,6 +55,7 @@ body {
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
+/* ── Card base ───────────────────────────────────── */
 .raw-card {
   background: #ffffff;
   border-radius: 18px;
@@ -67,29 +63,32 @@ body {
   box-shadow: 0 2px 12px rgba(139, 115, 85, 0.08);
 }
 
-/* Desktop: device frame */
+/* ── Desktop: iPhone frame on warm background ────── */
 @media (min-width: 768px) {
   body {
     background: #ddd7ca;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding: 32px 16px 80px;
+    padding: 40px 16px 80px;
     min-height: 100vh;
   }
+
   .phone-shell {
-    border-radius: 44px;
-    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.22),
-      0 4px 16px rgba(0, 0, 0, 0.12),
-      inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    border-radius: 52px;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.25),
+      0 4px 20px rgba(0, 0, 0, 0.12),
+      inset 0 0 0 1.5px rgba(255, 255, 255, 0.55);
     min-height: auto;
-    height: 844px;
+    height: 852px;
     overflow: hidden;
     position: relative;
   }
+
   .page-scroll {
-    height: calc(844px - 80px);
+    height: calc(852px - 80px);
   }
+
   .bottom-nav {
     position: absolute;
     left: 0;
